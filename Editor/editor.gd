@@ -6,7 +6,7 @@ var track : TrackR
 const PIXELS_PER_SECOND = 500
 
 var time_offset = 0
-var time_scale = 1.0
+var time_scale = 0.5
 
 func _ready():
 	open_track(track_path)
@@ -49,7 +49,11 @@ func delete_note(time:float, letter:String):
 			i += 1
 	load_track()
 
+func align(time:float):
+	return time - fmod(time + time_scale/2, time_scale)
+
 func add_note(time:float, letter:String):
+	time = align(time)
 	print("add ", letter, " ", str(time))
 	var idx = 0
 	while track.notes.size() < idx and track.notes[idx].offset < time:
@@ -63,9 +67,14 @@ func add_note(time:float, letter:String):
 		track.notes.insert(idx, TrackPointR.create(time, letter))
 
 func _process(_delta):
-	$TimeOffset.text = str(time_offset) + "\n scale " + str(time_scale)
+	if $TRACK.playing:
+		time_offset = $TRACK.get_playback_position()
+	$TimeOffset.text = str(time_offset) + \
+		"\n scale " + str(time_scale) + \
+		"\n max " + str(get_track_length())
 	if Input.is_action_just_pressed("edit_next"):
-		time_offset += time_scale
+		#time_offset += time_scale
+		toggle_music()
 	if Input.is_action_just_pressed("edit_prev"):
 		time_offset -= time_scale
 	if Input.is_action_just_pressed("edit_scale_zoom_in"):
@@ -81,6 +90,10 @@ func _process(_delta):
 			add_note(time_offset, ch)
 			load_track()
 
+func get_track_length():
+	if track.notes.size() == 0:
+		return 0
+	return track.notes[track.notes.size()-1].offset
 
 func _on_open_button_pressed():
 	$FileDialog.show()
@@ -94,3 +107,16 @@ func _on_save_button__pressed():
 
 func _on_button_play_pressed():
 	get_tree().change_scene_to_file("res://main_scene.tscn")
+
+
+func _on_button_preview_pressed():
+	pass
+	#toggle_music()
+
+func toggle_music():
+	if not $TRACK.playing:
+		if time_offset < 0:
+			time_offset = 0
+		$TRACK.play(time_offset)
+	else:
+		$TRACK.stop()

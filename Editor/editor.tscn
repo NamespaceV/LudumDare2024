@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dtosf0fk7dxdn"]
+[gd_scene load_steps=8 format=3 uid="uid://dtosf0fk7dxdn"]
 
 [ext_resource type="Script" path="res://Editor/editor.gd" id="1_5qih8"]
+[ext_resource type="AudioStream" uid="uid://os2ech28cao7" path="res://000ExternalAssets/Music/speck_-_Uncertain_Movement_1.mp3" id="2_8l6gt"]
 [ext_resource type="PackedScene" uid="uid://xdv5pgxx6cku" path="res://Editor/EnemyForEditor.tscn" id="2_ob068"]
 
 [sub_resource type="FontFile" id="FontFile_7hgvq"]
@@ -67,12 +68,15 @@ default_font_size = 50
 [node name="editor" type="Node2D"]
 script = ExtResource("1_5qih8")
 
+[node name="TRACK" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8l6gt")
+
 [node name="Path" type="Label" parent="."]
 offset_right = 40.0
 offset_bottom = 20.0
 theme_override_fonts/font = SubResource("FontFile_7hgvq")
 theme_override_font_sizes/font_size = 50
-text = "asdasdasd"
+text = "track_path"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(11, -130)
@@ -101,13 +105,15 @@ points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
 default_color = Color(0, 0, 0, 1)
 
 [node name="TimeOffset" type="Label" parent="."]
-offset_left = 65.0
-offset_top = 246.0
-offset_right = 693.0
-offset_bottom = 346.0
+offset_left = 10.0
+offset_top = 146.0
+offset_right = 876.0
+offset_bottom = 479.0
 theme_override_fonts/font = SubResource("FontFile_gpkp5")
 theme_override_font_sizes/font_size = 80
-text = "ewqeqweqweqweqweqe"
+text = "time
+step
+max"
 
 [node name="Button" type="Button" parent="."]
 offset_left = 1282.0
@@ -153,6 +159,7 @@ root_subfolder = "res://Track/"
 filters = PackedStringArray("*.tres")
 
 [connection signal="pressed" from="Button" to="." method="_on_open_button_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_preview_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_save_button__pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_play_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

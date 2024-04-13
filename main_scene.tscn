@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://m1hw86nlgwnx"]
+[gd_scene load_steps=8 format=3 uid="uid://m1hw86nlgwnx"]
 
 [ext_resource type="Texture2D" uid="uid://cf6qg8dkd6esv" path="res://000ExternalAssets/Legacy-Fantasy - High Forest 2.3/Background/Background.png" id="1_24sdn"]
 [ext_resource type="Script" path="res://MainGame/MainGame.gd" id="1_hksma"]
 [ext_resource type="TileSet" uid="uid://daf6ayx2fynr4" path="res://MainGame/rocks_tile_set.tres" id="3_pjlbs"]
+[ext_resource type="AudioStream" uid="uid://os2ech28cao7" path="res://000ExternalAssets/Music/speck_-_Uncertain_Movement_1.mp3" id="4_0a2av"]
 
 [sub_resource type="Curve2D" id="Curve2D_1bgdb"]
 _data = {
@@ -77,6 +78,9 @@ offset_right = 743.0
 offset_bottom = 2497.0
 theme_override_font_sizes/font_size = 300
 text = "E"
+
+[node name="TRACK" type="AudioStreamPlayer" parent="MainNode"]
+stream = ExtResource("4_0a2av")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MainNode"]
 anchors_preset = 8
@@ -187,6 +191,14 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 300
 text = "SUMMON SUCCESS"
 
+[node name="Button" type="Button" parent="MainNode"]
+offset_left = 1458.0
+offset_top = 24.0
+offset_right = 1923.0
+offset_bottom = 272.0
+theme_override_font_sizes/font_size = 200
+text = "EDITOR"
+
 [node name="Timer" type="Label" parent="."]
 offset_left = 14.0
 offset_top = 28.0
@@ -214,5 +226,6 @@ theme_override_font_sizes/font_size = 200
 text = "restart"
 
 [connection signal="pressed" from="MainNode/VBoxContainer/PlayButton" to="MainNode" method="_on_play_button_pressed"]
+[connection signal="pressed" from="MainNode/Button" to="MainNode" method="_on_button_pressed"]
 [connection signal="pressed" from="Button" to="MainNode" method="_on_button_pressed"]
 [connection signal="pressed" from="Button2" to="MainNode" method="_on_button_restart_pressed"]

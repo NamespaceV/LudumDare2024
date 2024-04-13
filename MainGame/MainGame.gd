@@ -28,7 +28,7 @@ var paths : Array[Path2D] = [
 
 @export var enemies = [] # Array[Array[Enemy]]
 
-const AFTER_LAST_NOTE_DELAY = 1
+const AFTER_LAST_NOTE_DELAY = 0.5
 
 var idx:int
 
@@ -47,11 +47,13 @@ func clear_enemies():
 func reset_level():
 	hp = 100
 	points = 0
-	song_time = - Enemy.TRACK_TIME_OFFSET_SECONDS
+	song_time = 0
 	idx = 0
 	$WIN.hide()
 	$FAIL.hide()
 	clear_enemies()
+	$TRACK.seek(0)
+	$TRACK.play()
 
 func _ready():
 	base_position = position
@@ -61,19 +63,7 @@ func _process(delta):
 	$HpBar.value = hp
 	$"../Timer".text = "Time: " + str(song_time) +"\n Pts: " + str(int(points))
 
-	if hp <= 0:
-		$FAIL.show()
-		return
-		
-	if idx > track.notes.size():
-		return
-
-	if idx == track.notes.size() and \
-			song_time > track.notes[idx-1].offset + \
-			Enemy.TRACK_TIME_OFFSET_SECONDS + AFTER_LAST_NOTE_DELAY:
-		points += hp * 15
-		idx += 1
-		$WIN.show()
+	if check_end_conditions():
 		return
 
 	song_time += delta
@@ -81,6 +71,26 @@ func _process(delta):
 #	if go_down:
 #		position = base_position + amplitude * clampf(song_time/0.5, 0,1)
 	check_spawn_enemies_and_idx()
+
+func check_end_conditions() -> bool:
+	if hp <= 0:
+		$FAIL.show()
+		$TRACK.stop()
+		return true
+		
+	if idx > track.notes.size():
+		return true
+
+	if idx == track.notes.size() and \
+			song_time > track.notes[idx-1].offset + \
+			Enemy.TRACK_TIME_OFFSET_SECONDS + AFTER_LAST_NOTE_DELAY:
+		points += hp * 15
+		idx += 1
+		$WIN.show()
+		$TRACK.stop()
+		return true
+	
+	return false
 
 func process_input():
 	for i in range(inputs.size()):

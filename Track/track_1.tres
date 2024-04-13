@@ -1,73 +1,83 @@
-[gd_resource type="Resource" script_class="TrackR" load_steps=16 format=3 uid="uid://vd61lx7tgld8"]
+[gd_resource type="Resource" script_class="TrackR" load_steps=18 format=3 uid="uid://vd61lx7tgld8"]
 
 [ext_resource type="Script" path="res://Track/track.gd" id="1_6es1o"]
 [ext_resource type="Script" path="res://Track/track_point.gd" id="1_e3yqp"]
 
-[sub_resource type="Resource" id="Resource_g8il6"]
+[sub_resource type="Resource" id="Resource_4nhvh"]
 script = ExtResource("1_e3yqp")
-offset = 0.0
+offset = 1.25
 notes = "w"
 
-[sub_resource type="Resource" id="Resource_qx7py"]
+[sub_resource type="Resource" id="Resource_og6ta"]
 script = ExtResource("1_e3yqp")
-offset = 0.5
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_g32ei"]
-script = ExtResource("1_e3yqp")
-offset = 1.0
-notes = "q"
-
-[sub_resource type="Resource" id="Resource_tgawr"]
-script = ExtResource("1_e3yqp")
-offset = 2.0
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_lxvr1"]
-script = ExtResource("1_e3yqp")
-offset = 3.0
+offset = 1.75
 notes = "e"
 
-[sub_resource type="Resource" id="Resource_hfrk7"]
+[sub_resource type="Resource" id="Resource_5118c"]
 script = ExtResource("1_e3yqp")
-offset = 4.0
-notes = "qwe"
-
-[sub_resource type="Resource" id="Resource_5j6qf"]
-script = ExtResource("1_e3yqp")
-offset = 5.0
-notes = "e"
-
-[sub_resource type="Resource" id="Resource_kepud"]
-script = ExtResource("1_e3yqp")
-offset = 6.0
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_oudaf"]
-script = ExtResource("1_e3yqp")
-offset = 6.5
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_fkn47"]
-script = ExtResource("1_e3yqp")
-offset = 7.0
+offset = 2.75
 notes = "q"
 
-[sub_resource type="Resource" id="Resource_8bw63"]
+[sub_resource type="Resource" id="Resource_kqumo"]
+script = ExtResource("1_e3yqp")
+offset = 3.25
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_67uff"]
+script = ExtResource("1_e3yqp")
+offset = 3.75
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_bwtx4"]
+script = ExtResource("1_e3yqp")
+offset = 4.25
+notes = "q"
+
+[sub_resource type="Resource" id="Resource_xg6vb"]
+script = ExtResource("1_e3yqp")
+offset = 4.75
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_ixesk"]
+script = ExtResource("1_e3yqp")
+offset = 5.25
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_6bi27"]
+script = ExtResource("1_e3yqp")
+offset = 5.75
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_3ymbn"]
+script = ExtResource("1_e3yqp")
+offset = 6.25
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_u4hay"]
+script = ExtResource("1_e3yqp")
+offset = 6.75
+notes = "q"
+
+[sub_resource type="Resource" id="Resource_1o3vu"]
 script = ExtResource("1_e3yqp")
 offset = 7.25
-notes = "q"
+notes = "w"
 
-[sub_resource type="Resource" id="Resource_ymtbn"]
-script = ExtResource("1_e3yqp")
-offset = 7.5
-notes = "q"
-
-[sub_resource type="Resource" id="Resource_iq1a7"]
+[sub_resource type="Resource" id="Resource_4gfg6"]
 script = ExtResource("1_e3yqp")
 offset = 7.75
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_mhwyt"]
+script = ExtResource("1_e3yqp")
+offset = 8.25
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_8xmhp"]
+script = ExtResource("1_e3yqp")
+offset = 8.75
 notes = "q"
 
 [resource]
 script = ExtResource("1_6es1o")
-notes = Array[ExtResource("1_e3yqp")]([SubResource("Resource_g8il6"), SubResource("Resource_qx7py"), SubResource("Resource_g32ei"), SubResource("Resource_tgawr"), SubResource("Resource_lxvr1"), SubResource("Resource_hfrk7"), SubResource("Resource_5j6qf"), SubResource("Resource_kepud"), SubResource("Resource_oudaf"), SubResource("Resource_fkn47"), SubResource("Resource_8bw63"), SubResource("Resource_ymtbn"), SubResource("Resource_iq1a7")])
+notes = Array[ExtResource("1_e3yqp")]([SubResource("Resource_4nhvh"), SubResource("Resource_og6ta"), SubResource("Resource_5118c"), SubResource("Resource_kqumo"), SubResource("Resource_67uff"), SubResource("Resource_bwtx4"), SubResource("Resource_xg6vb"), SubResource("Resource_ixesk"), SubResource("Resource_6bi27"), SubResource("Resource_3ymbn"), SubResource("Resource_u4hay"), SubResource("Resource_1o3vu"), SubResource("Resource_4gfg6"), SubResource("Resource_mhwyt"), SubResource("Resource_8xmhp")])
