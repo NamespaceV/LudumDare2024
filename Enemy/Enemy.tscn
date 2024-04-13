@@ -1,0 +1,71 @@
+[gd_scene load_steps=10 format=3 uid="uid://b6as3n3mob7gn"]
+
+[ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_58a08"]
+[ext_resource type="Texture2D" uid="uid://bamyywaav0ulx" path="res://000ExternalAssets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet-Black.png" id="1_wa83f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aomy3"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(0, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxeu1"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(48, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4a56"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(96, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_anpm0"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(144, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1y4nn"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(192, 0, 48, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4v6f"]
+atlas = ExtResource("1_wa83f")
+region = Rect2(240, 0, 48, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7u0aj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aomy3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxeu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4a56")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_anpm0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1y4nn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m4v6f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_58a08")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(5.5, 1)
+rotation = 1.455
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7u0aj")
+frame_progress = 0.344524
+flip_h = true
+
+[node name="Label" type="Label" parent="AnimatedSprite2D"]
+offset_right = 40.0
+offset_bottom = 20.0
+rotation = -1.46375
+text = "456"
