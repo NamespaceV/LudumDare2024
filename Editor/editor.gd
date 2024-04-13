@@ -6,7 +6,7 @@ var track : TrackR
 const PIXELS_PER_SECOND = 500
 
 var time_offset = 0
-var time_scale = 0.5
+var time_scale = 1./4.
 
 func _ready():
 	open_track(track_path)
@@ -18,6 +18,7 @@ func open_track(path:String):
 	load_track()
 
 func load_track():
+	$TRACK.stream = load(track.audio_file)
 	for c in $Lanes/Enemies.get_children():
 		c.queue_free()
 	var e_sc = load("res://Editor/EnemyForEditor.tscn")
@@ -50,7 +51,7 @@ func delete_note(time:float, letter:String):
 	load_track()
 
 func align(time:float):
-	return time - fmod(time + time_scale/2, time_scale)
+	return time - (  fmod(time + time_scale/2, time_scale) - time_scale/2)
 
 func add_note(time:float, letter:String):
 	time = align(time)
@@ -76,7 +77,7 @@ func _process(_delta):
 		#time_offset += time_scale
 		toggle_music()
 	if Input.is_action_just_pressed("edit_prev"):
-		time_offset -= time_scale
+		time_offset -= 1
 	if Input.is_action_just_pressed("edit_scale_zoom_in"):
 		time_scale /= 2
 	if Input.is_action_just_pressed("edit_scale_zoom_out"):
@@ -84,6 +85,9 @@ func _process(_delta):
 	if Input.is_action_just_pressed("edit_sync_to_scale"):
 		time_offset = floorf(time_offset)
 	$Lanes/Enemies.position.x = 733 - time_offset * PIXELS_PER_SECOND
+	$Lanes/Start.position.x = $Lanes/Enemies.position.x
+	$Line2D/Aligned.position.x = PIXELS_PER_SECOND * ( align(time_offset) - time_offset )
+	
 	for i in range(MainGame.inputs.size()):
 		var ch = MainGame.inputs[i]
 		if Input.is_action_just_pressed(ch):
@@ -105,9 +109,14 @@ func _on_save_button__pressed():
 	track.sort()
 	ResourceSaver.save(track)
 
-func _on_button_play_pressed():
-	get_tree().change_scene_to_file("res://main_scene.tscn")
 
+func _on_option_button_item_selected(index):
+	var t : String = $OptionButton.get_item_text(index)
+	AudioServer.playback_speed_scale = float(t.trim_prefix("x"))
+
+func _on_button_play_pressed():
+	AudioServer.playback_speed_scale = 1
+	get_tree().change_scene_to_file("res://main_scene.tscn")
 
 func _on_button_preview_pressed():
 	pass
@@ -120,3 +129,4 @@ func toggle_music():
 		$TRACK.play(time_offset)
 	else:
 		$TRACK.stop()
+

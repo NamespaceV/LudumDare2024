@@ -3,81 +3,82 @@
 [ext_resource type="Script" path="res://Track/track.gd" id="1_6es1o"]
 [ext_resource type="Script" path="res://Track/track_point.gd" id="1_e3yqp"]
 
-[sub_resource type="Resource" id="Resource_4nhvh"]
+[sub_resource type="Resource" id="Resource_nlbhp"]
 script = ExtResource("1_e3yqp")
-offset = 1.25
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_og6ta"]
-script = ExtResource("1_e3yqp")
-offset = 1.75
-notes = "e"
-
-[sub_resource type="Resource" id="Resource_5118c"]
-script = ExtResource("1_e3yqp")
-offset = 2.75
+offset = 1.5
 notes = "q"
 
-[sub_resource type="Resource" id="Resource_kqumo"]
+[sub_resource type="Resource" id="Resource_fb6fh"]
 script = ExtResource("1_e3yqp")
-offset = 3.25
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_67uff"]
-script = ExtResource("1_e3yqp")
-offset = 3.75
+offset = 2.0
 notes = "e"
 
-[sub_resource type="Resource" id="Resource_bwtx4"]
+[sub_resource type="Resource" id="Resource_ysybf"]
 script = ExtResource("1_e3yqp")
-offset = 4.25
+offset = 2.5
 notes = "q"
 
-[sub_resource type="Resource" id="Resource_xg6vb"]
+[sub_resource type="Resource" id="Resource_v6qil"]
 script = ExtResource("1_e3yqp")
-offset = 4.75
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_ixesk"]
-script = ExtResource("1_e3yqp")
-offset = 5.25
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_6bi27"]
-script = ExtResource("1_e3yqp")
-offset = 5.75
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_3ymbn"]
-script = ExtResource("1_e3yqp")
-offset = 6.25
+offset = 3.0
 notes = "e"
 
-[sub_resource type="Resource" id="Resource_u4hay"]
+[sub_resource type="Resource" id="Resource_tvjec"]
 script = ExtResource("1_e3yqp")
-offset = 6.75
+offset = 4.0
 notes = "q"
 
-[sub_resource type="Resource" id="Resource_1o3vu"]
+[sub_resource type="Resource" id="Resource_nauvc"]
 script = ExtResource("1_e3yqp")
-offset = 7.25
-notes = "w"
+offset = 5.0
+notes = "qwe"
 
-[sub_resource type="Resource" id="Resource_4gfg6"]
+[sub_resource type="Resource" id="Resource_2htc6"]
 script = ExtResource("1_e3yqp")
-offset = 7.75
-notes = "w"
-
-[sub_resource type="Resource" id="Resource_mhwyt"]
-script = ExtResource("1_e3yqp")
-offset = 8.25
+offset = 6.5
 notes = "e"
 
-[sub_resource type="Resource" id="Resource_8xmhp"]
+[sub_resource type="Resource" id="Resource_0vv7r"]
 script = ExtResource("1_e3yqp")
-offset = 8.75
+offset = 7.5
 notes = "q"
+
+[sub_resource type="Resource" id="Resource_aiaj3"]
+script = ExtResource("1_e3yqp")
+offset = 8.5
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_2q4lk"]
+script = ExtResource("1_e3yqp")
+offset = 9.5
+notes = "q"
+
+[sub_resource type="Resource" id="Resource_jvvpb"]
+script = ExtResource("1_e3yqp")
+offset = 10.5
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_20ea4"]
+script = ExtResource("1_e3yqp")
+offset = 12.75
+notes = "q"
+
+[sub_resource type="Resource" id="Resource_nd1t1"]
+script = ExtResource("1_e3yqp")
+offset = 15.25
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_7uo67"]
+script = ExtResource("1_e3yqp")
+offset = 17.0
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_rlwid"]
+script = ExtResource("1_e3yqp")
+offset = 18.25
+notes = "e"
 
 [resource]
 script = ExtResource("1_6es1o")
-notes = Array[ExtResource("1_e3yqp")]([SubResource("Resource_4nhvh"), SubResource("Resource_og6ta"), SubResource("Resource_5118c"), SubResource("Resource_kqumo"), SubResource("Resource_67uff"), SubResource("Resource_bwtx4"), SubResource("Resource_xg6vb"), SubResource("Resource_ixesk"), SubResource("Resource_6bi27"), SubResource("Resource_3ymbn"), SubResource("Resource_u4hay"), SubResource("Resource_1o3vu"), SubResource("Resource_4gfg6"), SubResource("Resource_mhwyt"), SubResource("Resource_8xmhp")])
+notes = Array[ExtResource("1_e3yqp")]([SubResource("Resource_nlbhp"), SubResource("Resource_fb6fh"), SubResource("Resource_ysybf"), SubResource("Resource_v6qil"), SubResource("Resource_tvjec"), SubResource("Resource_nauvc"), SubResource("Resource_2htc6"), SubResource("Resource_0vv7r"), SubResource("Resource_aiaj3"), SubResource("Resource_2q4lk"), SubResource("Resource_jvvpb"), SubResource("Resource_20ea4"), SubResource("Resource_nd1t1"), SubResource("Resource_7uo67"), SubResource("Resource_rlwid")])
+audio_file = "res://000ExternalAssets/Music/jlbrock44_-_Twiddler_Laying_Bricks_in_the_Wall_(Pink_Floyd_Redux)_1.mp3"

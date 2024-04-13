@@ -5,9 +5,6 @@
 [ext_resource type="PackedScene" uid="uid://xdv5pgxx6cku" path="res://Editor/EnemyForEditor.tscn" id="2_ob068"]
 
 [sub_resource type="FontFile" id="FontFile_7hgvq"]
-face_index = null
-embolden = null
-transform = null
 cache/0/50/0/ascent = 0.0
 cache/0/50/0/descent = 0.0
 cache/0/50/0/underline_position = 0.0
@@ -24,9 +21,6 @@ cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="FontFile_gpkp5"]
-face_index = null
-embolden = null
-transform = null
 cache/0/80/0/ascent = 0.0
 cache/0/80/0/descent = 0.0
 cache/0/80/0/underline_position = 0.0
@@ -43,9 +37,6 @@ cache/0/16/0/kerning_overrides/80/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="FontFile_qwyh4"]
-face_index = null
-embolden = null
-transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
@@ -78,8 +69,14 @@ theme_override_fonts/font = SubResource("FontFile_7hgvq")
 theme_override_font_sizes/font_size = 50
 text = "track_path"
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(11, -130)
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(733, 54)
+points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
+default_color = Color(0, 0, 0, 1)
+
+[node name="Aligned" type="Line2D" parent="Line2D"]
+points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
+default_color = Color(0, 0.898039, 0, 0.709804)
 
 [node name="Lanes" type="Node2D" parent="."]
 
@@ -94,15 +91,15 @@ polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
 position = Vector2(-2, 303)
 polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
 
+[node name="Start" type="Line2D" parent="Lanes"]
+position = Vector2(733, 54)
+points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
+default_color = Color(0.141176, 0.819608, 1, 1)
+
 [node name="Enemies" type="Node2D" parent="Lanes"]
 
 [node name="Enemy" parent="Lanes/Enemies" instance=ExtResource("2_ob068")]
 position = Vector2(148, 524)
-
-[node name="Line2D" type="Line2D" parent="."]
-position = Vector2(733, 54)
-points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
-default_color = Color(0, 0, 0, 1)
 
 [node name="TimeOffset" type="Label" parent="."]
 offset_left = 10.0
@@ -124,12 +121,12 @@ scale = Vector2(4, 4)
 text = "📂"
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 800.0
-offset_top = 21.0
-offset_right = 892.0
-offset_bottom = 59.0
+offset_left = 702.0
+offset_top = 31.0
+offset_right = 794.0
+offset_bottom = 69.0
 scale = Vector2(4, 4)
-text = "🤣"
+text = "🤣nothing"
 
 [node name="Button2" type="Button" parent="."]
 offset_left = 1598.0
@@ -158,8 +155,24 @@ file_mode = 0
 root_subfolder = "res://Track/"
 filters = PackedStringArray("*.tres")
 
+[node name="OptionButton" type="OptionButton" parent="."]
+offset_left = 429.0
+offset_top = 65.0
+offset_right = 642.0
+offset_bottom = 176.0
+theme_override_font_sizes/font_size = 50
+item_count = 3
+selected = 0
+popup/item_0/text = "x1"
+popup/item_0/id = 0
+popup/item_1/text = "x0.75"
+popup/item_1/id = 1
+popup/item_2/text = "x0.5"
+popup/item_2/id = 2
+
 [connection signal="pressed" from="Button" to="." method="_on_open_button_pressed"]
 [connection signal="pressed" from="Button3" to="." method="_on_button_preview_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_save_button__pressed"]
 [connection signal="pressed" from="Button4" to="." method="_on_button_play_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="item_selected" from="OptionButton" to="." method="_on_option_button_item_selected"]

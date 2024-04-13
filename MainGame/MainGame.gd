@@ -57,16 +57,18 @@ func reset_level():
 
 func _ready():
 	base_position = position
+	$TRACK.stream = load(track.audio_file)
 	reset_level()
 
-func _process(delta):
+func _process(_delta):
 	$HpBar.value = hp
-	$"../Timer".text = "Time: " + str(song_time) +"\n Pts: " + str(int(points))
+	$"../Timer".text = "Time: " +  ("%.2f" % song_time) +"\n Pts: " + str(int(points))
 
 	if check_end_conditions():
 		return
 
-	song_time += delta
+	song_time = $TRACK.get_playback_position()
+
 	process_input()
 #	if go_down:
 #		position = base_position + amplitude * clampf(song_time/0.5, 0,1)
@@ -122,7 +124,7 @@ func spawn_explosion(id:int):
 			to_remove.append(_e)
 			continue
 		var e = _e as Enemy
-		print (e.name, " song time: ", song_time,  " dif: ", e.pct - e.TRACK_TIME_OFFSET_SECONDS)
+		print (e.name, " song time: ", ("%.2f" % song_time),  " dif: ", "%.2f" % (e.pct - e.TRACK_TIME_OFFSET_SECONDS))
 
 		if e.near_kill_zone():
 			points += 100
