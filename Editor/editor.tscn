@@ -1,0 +1,54 @@
+[gd_scene load_steps=4 format=3 uid="uid://dtosf0fk7dxdn"]
+
+[ext_resource type="Script" path="res://Editor/editor.gd" id="1_5qih8"]
+[ext_resource type="PackedScene" uid="uid://xdv5pgxx6cku" path="res://Editor/EnemyForEditor.tscn" id="2_ob068"]
+
+[sub_resource type="FontFile" id="FontFile_7hgvq"]
+face_index = null
+embolden = null
+transform = null
+cache/0/50/0/ascent = 0.0
+cache/0/50/0/descent = 0.0
+cache/0/50/0/underline_position = 0.0
+cache/0/50/0/underline_thickness = 0.0
+cache/0/50/0/scale = 1.0
+cache/0/50/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/50/0/kerning_overrides/16/0 = Vector2(0, 0)
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
+cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
+
+[node name="editor" type="Node2D"]
+script = ExtResource("1_5qih8")
+
+[node name="Path" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 20.0
+theme_override_fonts/font = SubResource("FontFile_7hgvq")
+theme_override_font_sizes/font_size = 50
+text = "asdasdasd"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(11, -130)
+
+[node name="Lanes" type="Node2D" parent="."]
+
+[node name="Q" type="Polygon2D" parent="Lanes"]
+polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
+
+[node name="W" type="Polygon2D" parent="Lanes"]
+position = Vector2(3, 138)
+polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
+
+[node name="E" type="Polygon2D" parent="Lanes"]
+position = Vector2(-4, 283)
+polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
+
+[node name="Enemies" type="Node2D" parent="Lanes"]
+
+[node name="Enemy" parent="Lanes/Enemies" instance=ExtResource("2_ob068")]
+position = Vector2(148, 524)

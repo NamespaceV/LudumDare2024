@@ -34,7 +34,6 @@ const inputs = ["q","w","e"]
 func reset_stats():
 	hp = 100
 	points = 0
-	
 
 func _ready():
 	base_position = position
