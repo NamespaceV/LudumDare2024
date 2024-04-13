@@ -96,7 +96,8 @@ polygon = PackedVector2Array(80, 493, 1807, 496, 1807, 557, 80, 557)
 position = Vector2(148, 524)
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(144, 186, 141, 958)
+position = Vector2(733, 54)
+points = PackedVector2Array(144, 186, 143.815, 233.598, 141, 958)
 default_color = Color(0, 0, 0, 1)
 
 [node name="TimeOffset" type="Label" parent="."]
@@ -117,10 +118,10 @@ scale = Vector2(4, 4)
 text = "📂"
 
 [node name="Button3" type="Button" parent="."]
-offset_left = 978.0
-offset_top = 19.0
-offset_right = 1048.0
-offset_bottom = 68.0
+offset_left = 800.0
+offset_top = 21.0
+offset_right = 892.0
+offset_bottom = 59.0
 scale = Vector2(4, 4)
 text = "🤣"
 
@@ -130,7 +131,15 @@ offset_top = 20.0
 offset_right = 1668.0
 offset_bottom = 79.0
 scale = Vector2(4, 4)
-text = "😎"
+text = "💾"
+
+[node name="Button4" type="Button" parent="."]
+offset_left = 1415.0
+offset_top = 902.0
+offset_right = 1518.0
+offset_bottom = 944.0
+scale = Vector2(4, 4)
+text = "▶️"
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a File"
@@ -145,4 +154,5 @@ filters = PackedStringArray("*.tres")
 
 [connection signal="pressed" from="Button" to="." method="_on_open_button_pressed"]
 [connection signal="pressed" from="Button2" to="." method="_on_save_button__pressed"]
+[connection signal="pressed" from="Button4" to="." method="_on_button_play_pressed"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]

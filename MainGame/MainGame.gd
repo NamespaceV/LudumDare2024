@@ -28,33 +28,67 @@ var paths : Array[Path2D] = [
 
 @export var enemies = [] # Array[Array[Enemy]]
 
+const AFTER_LAST_NOTE_DELAY = 1
+
 var idx:int
 
 const inputs = ["q","w","e"]
 
-func reset_stats():
-	hp = 100
-	points = 0
-
-func _ready():
-	base_position = position
+func clear_enemies():
+	for lane in enemies:
+		for e in lane:
+			if not is_instance_valid(e):
+				continue
+			e.kill()
+	enemies.clear()
 	for _i in range(inputs.size()):
 		enemies.append([])
 
+func reset_level():
+	hp = 100
+	points = 0
+	song_time = - Enemy.TRACK_TIME_OFFSET_SECONDS
+	idx = 0
+	$WIN.hide()
+	$FAIL.hide()
+	clear_enemies()
+
+func _ready():
+	base_position = position
+	reset_level()
+
 func _process(delta):
-	song_time += delta
 	$HpBar.value = hp
 	$"../Timer".text = "Time: " + str(song_time) +"\n Pts: " + str(int(points))
-	if go_down:
-		position = base_position + amplitude * clampf(song_time/0.5, 0,1)
-	
+
+	if hp <= 0:
+		$FAIL.show()
+		return
+		
+	if idx > track.notes.size():
+		return
+
+	if idx == track.notes.size() and \
+			song_time > track.notes[idx-1].offset + \
+			Enemy.TRACK_TIME_OFFSET_SECONDS + AFTER_LAST_NOTE_DELAY:
+		points += hp * 15
+		idx += 1
+		$WIN.show()
+		return
+
+	song_time += delta
+	process_input()
+#	if go_down:
+#		position = base_position + amplitude * clampf(song_time/0.5, 0,1)
+	check_spawn_enemies_and_idx()
+
+func process_input():
 	for i in range(inputs.size()):
 		if Input.is_action_just_pressed(inputs[i]):
 			spawn_explosion(i)
-	
+
+func check_spawn_enemies_and_idx():
 	if idx >= track.notes.size():
-		idx = 0
-		song_time = -2
 		return
 	
 	if song_time > track.notes[idx].offset - Enemy.TRACK_TIME_OFFSET_SECONDS:
@@ -82,8 +116,8 @@ func spawn_explosion(id:int):
 
 		if e.near_kill_zone():
 			points += 100
-			ex.hit()
 			e.kill()
+			ex.hit()
 	for _e in to_remove:
 		lane.remove_at(lane.find(_e))
 
@@ -95,6 +129,8 @@ func spawn_enemy(id:int):
 
 func enemy_run_away():
 	hp -= 10
+	if hp <= 0:
+		$FAIL.show()
 
 func _on_play_button_pressed():
 	go_down = true
@@ -105,3 +141,7 @@ func _on_play_button_pressed():
 
 func _on_button_pressed():
 	get_tree().change_scene_to_file("res://Editor/editor.tscn")
+
+
+func _on_button_restart_pressed():
+	reset_level()

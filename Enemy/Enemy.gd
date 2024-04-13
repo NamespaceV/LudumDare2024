@@ -1,7 +1,8 @@
 class_name Enemy
 extends Node2D
 
-const TRACK_TIME_OFFSET_SECONDS = 0.6 # sec
+const SPEED = 0.5
+const TRACK_TIME_OFFSET_SECONDS = 0.6 / SPEED # sec
 const TOLERANCE_SECONDS = 0.1
 
 var p:Path2D
@@ -13,7 +14,7 @@ func _ready():
 	$AnimatedSprite2D.play()
 
 func _process(delta):
-	pct += delta
+	pct += delta * SPEED
 	position = p.position + p.scale * p.curve.sample(0,pct)
 	$AnimatedSprite2D/Label.text = str(int(pct * 100))
 	if pct > 1:
@@ -21,7 +22,7 @@ func _process(delta):
 		queue_free()
 
 func near_kill_zone():
-	return abs(pct - TRACK_TIME_OFFSET_SECONDS) < TOLERANCE_SECONDS
+	return abs(pct/SPEED - TRACK_TIME_OFFSET_SECONDS) < TOLERANCE_SECONDS
 
 func kill():
 	hide()

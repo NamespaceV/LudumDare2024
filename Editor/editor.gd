@@ -74,7 +74,7 @@ func _process(_delta):
 		time_scale *= 2
 	if Input.is_action_just_pressed("edit_sync_to_scale"):
 		time_offset = floorf(time_offset)
-	$Lanes/Enemies.position.x = - time_offset * PIXELS_PER_SECOND
+	$Lanes/Enemies.position.x = 733 - time_offset * PIXELS_PER_SECOND
 	for i in range(MainGame.inputs.size()):
 		var ch = MainGame.inputs[i]
 		if Input.is_action_just_pressed(ch):
@@ -89,5 +89,8 @@ func _on_file_dialog_file_selected(path):
 	open_track(path)
 
 func _on_save_button__pressed():
+	track.sort()
 	ResourceSaver.save(track)
 
+func _on_button_play_pressed():
+	get_tree().change_scene_to_file("res://main_scene.tscn")
