@@ -1,3 +1,4 @@
+class_name MainGame
 extends Node2D
 
 var base_position
@@ -100,3 +101,7 @@ func _on_play_button_pressed():
 	song_time = -0
 	idx = 0
 	$VBoxContainer/PlayButton.hide()
+
+
+func _on_button_pressed():
+	get_tree().change_scene_to_file("res://Editor/editor.tscn")

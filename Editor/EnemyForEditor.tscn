@@ -1,5 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://xdv5pgxx6cku"]
+[gd_scene load_steps=12 format=3 uid="uid://xdv5pgxx6cku"]
 
+[ext_resource type="Script" path="res://Editor/EnemyForEditor.gd" id="1_bwmov"]
 [ext_resource type="Texture2D" uid="uid://bamyywaav0ulx" path="res://000ExternalAssets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet-Black.png" id="2_bpukd"]
 
 [sub_resource type="Gradient" id="Gradient_mkijd"]
@@ -56,9 +57,14 @@ animations = [{
 "speed": 20.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7bq52"]
+size = Vector2(87, 58)
+
 [node name="Enemy" type="Node2D"]
+script = ExtResource("1_bwmov")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
 position = Vector2(14, 19)
 rotation = 1.455
 scale = Vector2(2, 2)
@@ -77,3 +83,12 @@ rotation = -0.0710983
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_7u0aj")
 frame_progress = 0.344524
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(3.5, 1)
+shape = SubResource("RectangleShape2D_7bq52")
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_area_2d_mouse_exited"]

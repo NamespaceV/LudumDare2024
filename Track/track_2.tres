@@ -1,0 +1,43 @@
+[gd_resource type="Resource" script_class="TrackR" load_steps=10 format=3 uid="uid://de5pdln23rlvl"]
+
+[ext_resource type="Script" path="res://Track/track_point.gd" id="1_nys1l"]
+[ext_resource type="Script" path="res://Track/track.gd" id="2_dhoy1"]
+
+[sub_resource type="Resource" id="Resource_g32ei"]
+script = ExtResource("1_nys1l")
+offset = 1.0
+notes = "q"
+
+[sub_resource type="Resource" id="Resource_tgawr"]
+script = ExtResource("1_nys1l")
+offset = 2.0
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_lxvr1"]
+script = ExtResource("1_nys1l")
+offset = 3.0
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_hfrk7"]
+script = ExtResource("1_nys1l")
+offset = 4.0
+notes = "qwe"
+
+[sub_resource type="Resource" id="Resource_5j6qf"]
+script = ExtResource("1_nys1l")
+offset = 5.0
+notes = "e"
+
+[sub_resource type="Resource" id="Resource_kepud"]
+script = ExtResource("1_nys1l")
+offset = 6.0
+notes = "w"
+
+[sub_resource type="Resource" id="Resource_fkn47"]
+script = ExtResource("1_nys1l")
+offset = 7.0
+notes = "q"
+
+[resource]
+script = ExtResource("2_dhoy1")
+notes = Array[ExtResource("1_nys1l")]([SubResource("Resource_g32ei"), SubResource("Resource_tgawr"), SubResource("Resource_lxvr1"), SubResource("Resource_hfrk7"), SubResource("Resource_5j6qf"), SubResource("Resource_kepud"), SubResource("Resource_fkn47")])
