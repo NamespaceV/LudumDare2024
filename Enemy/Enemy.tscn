@@ -1,7 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://b6as3n3mob7gn"]
+[gd_scene load_steps=11 format=3 uid="uid://b6as3n3mob7gn"]
 
 [ext_resource type="Script" path="res://Enemy/Enemy.gd" id="1_58a08"]
 [ext_resource type="Texture2D" uid="uid://bamyywaav0ulx" path="res://000ExternalAssets/Legacy-Fantasy - High Forest 2.3/Mob/Boar/Run/Run-Sheet-Black.png" id="1_wa83f"]
+
+[sub_resource type="Gradient" id="Gradient_mkijd"]
+offsets = PackedFloat32Array(0, 0.126168, 0.682243, 0.997727)
+colors = PackedColorArray(0.721569, 0.721569, 0.721569, 0, 0.462745, 0.462745, 0.462745, 1, 0.721569, 0.721569, 0.721569, 1, 1, 1, 1, 0)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aomy3"]
 atlas = ExtResource("1_wa83f")
@@ -56,8 +60,21 @@ animations = [{
 [node name="Enemy" type="Node2D"]
 script = ExtResource("1_58a08")
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-18, 10)
+rotation = 1.455
+scale = Vector2(2, 2)
+amount = 100
+lifetime = 0.1
+speed_scale = 0.6
+gravity = Vector2(0, -30)
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+color = Color(1, 0.45098, 0, 1)
+color_ramp = SubResource("Gradient_mkijd")
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(5.5, 1)
+position = Vector2(2, 1)
 rotation = 1.455
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_7u0aj")
