@@ -168,6 +168,16 @@ theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 300
 text = "SUMMON FAILED"
 
+[node name="PCT" type="Label" parent="MainNode/FAIL"]
+offset_left = -265.0
+offset_top = 2022.0
+offset_right = 73.0
+offset_bottom = 2386.0
+theme_override_colors/font_color = Color(0.988235, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 300
+text = "10 pct"
+
 [node name="WIN" type="Node2D" parent="MainNode"]
 visible = false
 

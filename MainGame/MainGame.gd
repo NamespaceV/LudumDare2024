@@ -9,6 +9,12 @@ var song_time :float = 0
 var points :float = 0
 var go_down = false
 var hp = 100
+var time_since_last_hit = 0
+
+const HEAL_DELAY = 1.5
+const HEAL_PER_SECOND = 1.0
+const DMG_PER_MISS = 7.0
+
 
 #@export
 @onready
@@ -45,7 +51,7 @@ func clear_enemies():
 		enemies.append([])
 
 func reset_level():
-	hp = 100
+	hp = 100.0
 	points = 0
 	song_time = 0
 	idx = 0
@@ -60,7 +66,7 @@ func _ready():
 	$TRACK.stream = load(track.audio_file)
 	reset_level()
 
-func _process(_delta):
+func _process(delta):
 	$HpBar.value = hp
 	$"../Timer".text = "Time: " +  ("%.2f" % song_time) +"\n Pts: " + str(int(points))
 
@@ -73,10 +79,17 @@ func _process(_delta):
 #	if go_down:
 #		position = base_position + amplitude * clampf(song_time/0.5, 0,1)
 	check_spawn_enemies_and_idx()
+	healing(delta)
+
+func healing(delta):
+	time_since_last_hit += delta
+	if time_since_last_hit > HEAL_DELAY:
+		hp += delta * HEAL_PER_SECOND
 
 func check_end_conditions() -> bool:
 	if hp <= 0:
 		$FAIL.show()
+		$FAIL/PCT.text = str(int((song_time * 100 / $TRACK.stream.get_length())))+" pct"
 		$TRACK.stop()
 		return true
 		
@@ -140,7 +153,8 @@ func spawn_enemy(id:int):
 	return e
 
 func enemy_run_away():
-	hp -= 10
+	hp -= DMG_PER_MISS
+	time_since_last_hit = 0
 	if hp <= 0:
 		$FAIL.show()
 
