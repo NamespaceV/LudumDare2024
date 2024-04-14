@@ -71,6 +71,21 @@ offset_bottom = 2482.0
 theme_override_font_sizes/font_size = 300
 text = "W"
 
+[node name="TRACK_NAME" type="Label" parent="MainNode/BG"]
+offset_left = -962.0
+offset_top = 1721.0
+offset_right = 1055.0
+offset_bottom = 2568.0
+theme_override_colors/font_color = Color(0, 0.407843, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 100
+text = "Twiddler Laying Bricks in the Wall
+ (Pink Floyd Redux)
+spinningmerkaba
+featuring Apoxode, Mr_Yesterday
+http://dig.ccmixter.org/"
+horizontal_alignment = 1
+
 [node name="Label3" type="Label" parent="MainNode/BG"]
 offset_left = 609.0
 offset_top = 2133.0

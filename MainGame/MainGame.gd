@@ -58,6 +58,7 @@ func reset_level():
 	$WIN.hide()
 	$FAIL.hide()
 	clear_enemies()
+	$BG/TRACK_NAME.text = track.description
 	$TRACK.seek(0)
 	$TRACK.play()
 
