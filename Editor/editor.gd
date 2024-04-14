@@ -6,7 +6,7 @@ var track : TrackR
 const PIXELS_PER_SECOND = 500
 
 var time_offset = 0
-var time_scale = 1./4.
+var time_scale = 1./4
 
 func _ready():
 	open_track(track_path)
@@ -17,8 +17,9 @@ func open_track(path:String):
 	track = load(path)
 	load_track()
 
-func load_track():
-	$TRACK.stream = load(track.audio_file)
+func load_track(keep_music_going = false):
+	if not keep_music_going:
+		$TRACK.stream = load(track.audio_file)
 	for c in $Lanes/Enemies.get_children():
 		c.queue_free()
 	var e_sc = load("res://Editor/EnemyForEditor.tscn")
@@ -48,7 +49,7 @@ func delete_note(time:float, letter:String):
 			track.notes.remove_at(i)
 		else:
 			i += 1
-	load_track()
+	load_track(true)
 
 func align(time:float):
 	return time - (  fmod(time + time_scale/2, time_scale) - time_scale/2)
@@ -70,9 +71,9 @@ func add_note(time:float, letter:String):
 func _process(_delta):
 	if $TRACK.playing:
 		time_offset = $TRACK.get_playback_position()
-	$TimeOffset.text = str(time_offset) + \
+	$TimeOffset.text = ("%.2f s" % time_offset) + \
 		"\n scale " + str(time_scale) + \
-		"\n max " + str(get_track_length())
+		"\n max " + ("%.2f s" % get_track_length())
 	if Input.is_action_just_pressed("edit_next"):
 		#time_offset += time_scale
 		toggle_music()
@@ -92,7 +93,31 @@ func _process(_delta):
 		var ch = MainGame.inputs[i]
 		if Input.is_action_just_pressed(ch):
 			add_note(time_offset, ch)
-			load_track()
+			load_track(true)
+
+	process_mouse()
+
+var mouse_down_last_click = false
+var mouse_start_pos : Vector2
+
+func process_mouse():
+	if $TRACK.playing:
+		mouse_down_last_click = false
+		return
+	var mouse_pos = get_viewport().get_mouse_position()
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if not mouse_down_last_click:
+			mouse_start_pos = mouse_pos
+		mouse_down_last_click = true
+
+		var diff = (mouse_pos - mouse_start_pos).x
+		time_offset -= diff / PIXELS_PER_SECOND
+
+		mouse_start_pos = mouse_pos
+	else:
+		mouse_down_last_click = false
+		
+
 
 func get_track_length():
 	if track.notes.size() == 0:

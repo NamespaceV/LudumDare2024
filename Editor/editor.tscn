@@ -5,6 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://xdv5pgxx6cku" path="res://Editor/EnemyForEditor.tscn" id="2_ob068"]
 
 [sub_resource type="FontFile" id="FontFile_7hgvq"]
+face_index = null
+embolden = null
+transform = null
 cache/0/50/0/ascent = 0.0
 cache/0/50/0/descent = 0.0
 cache/0/50/0/underline_position = 0.0
@@ -21,6 +24,9 @@ cache/0/16/0/kerning_overrides/50/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="FontFile_gpkp5"]
+face_index = null
+embolden = null
+transform = null
 cache/0/80/0/ascent = 0.0
 cache/0/80/0/descent = 0.0
 cache/0/80/0/underline_position = 0.0
@@ -37,6 +43,9 @@ cache/0/16/0/kerning_overrides/80/0 = Vector2(0, 0)
 cache/0/16/0/kerning_overrides/16/0 = Vector2(0, 0)
 
 [sub_resource type="FontFile" id="FontFile_qwyh4"]
+face_index = null
+embolden = null
+transform = null
 cache/0/16/0/ascent = 0.0
 cache/0/16/0/descent = 0.0
 cache/0/16/0/underline_position = 0.0
