@@ -3,6 +3,7 @@ extends Resource
 
 @export var notes: Array[TrackPointR] # must be sorted
 @export_file("*.mp3") var audio_file: String
+@export var bpm : float = 120
 @export_multiline var description:String
 
 func sort():

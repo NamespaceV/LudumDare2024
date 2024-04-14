@@ -94,14 +94,9 @@ func check_end_conditions() -> bool:
 		$TRACK.stop()
 		return true
 		
-	if idx > track.notes.size():
-		return true
-
-	if idx == track.notes.size() and \
-			song_time > track.notes[idx-1].offset + \
-			Enemy.TRACK_TIME_OFFSET_SECONDS + AFTER_LAST_NOTE_DELAY:
+	if not $TRACK.playing and idx > 0:
 		points += hp * 15
-		idx += 1
+		idx = -1
 		$WIN.show()
 		$TRACK.stop()
 		return true
@@ -153,7 +148,11 @@ func spawn_enemy(id:int):
 	e.run_away.connect(enemy_run_away)
 	return e
 
-func enemy_run_away():
+func enemy_run_away(e:Enemy):
+	var run_away = load("res://RunAway/run_away.tscn").instantiate()
+	add_child(run_away)
+	run_away.position = e.position
+	print("run away ", run_away.position)
 	hp -= DMG_PER_MISS
 	time_since_last_hit = 0
 	if hp <= 0:

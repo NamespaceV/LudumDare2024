@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://cb0xf585dkrdr"]
+
+[ext_resource type="Script" path="res://RunAway/run_away.gd" id="1_ys4fq"]
+
+[sub_resource type="Gradient" id="Gradient_x42il"]
+offsets = PackedFloat32Array(0, 0.136126, 0.565445, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.104712, 0.104712, 0.104712, 1, 0.780105, 0.780105, 0.780105, 1, 1, 1, 1, 0)
+
+[node name="run_away" type="Node2D"]
+script = ExtResource("1_ys4fq")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 50
+lifetime = 0.2
+one_shot = true
+spread = 180.0
+gravity = Vector2(0, 3980)
+initial_velocity_min = 378.15
+initial_velocity_max = 378.15
+angular_velocity_min = 133.11
+angular_velocity_max = 133.11
+angle_min = -145.2
+angle_max = 290.4
+scale_amount_min = 50.0
+scale_amount_max = 50.0
+color = Color(1, 0.188235, 0.203922, 1)
+color_ramp = SubResource("Gradient_x42il")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

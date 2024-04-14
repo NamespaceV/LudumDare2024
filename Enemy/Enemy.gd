@@ -8,7 +8,8 @@ const TOLERANCE_SECONDS = 0.1
 var p:Path2D
 var pct = 0.
 
-signal run_away
+signal run_away(e : Enemy)
+var run_away_done
 
 func _ready():
 	$AnimatedSprite2D.play()
@@ -17,8 +18,11 @@ func _process(delta):
 	pct += delta * SPEED
 	position = p.position + p.scale * p.curve.sample(0,pct)
 	$AnimatedSprite2D/Label.text = str(int(pct * 100))
+	if pct/SPEED > TRACK_TIME_OFFSET_SECONDS + TOLERANCE_SECONDS:
+		if not run_away_done:
+			run_away.emit(self)
+			run_away_done = true
 	if pct > 1:
-		run_away.emit()
 		queue_free()
 
 func near_kill_zone():

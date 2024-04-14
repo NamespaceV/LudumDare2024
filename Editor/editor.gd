@@ -5,8 +5,10 @@ var track : TrackR
 
 const PIXELS_PER_SECOND = 500
 
-var time_offset = 0
-var time_scale = 1./4
+var current_time = 0
+var time_scale = 1./4 # 60. / BPM
+
+@onready var enemy_icon_scene = load("res://Editor/EnemyForEditor.tscn")
 
 func _ready():
 	open_track(track_path)
@@ -15,6 +17,7 @@ func open_track(path:String):
 	track_path = path
 	$Path.text = path
 	track = load(path)
+	time_scale = 60.0 / track.bpm
 	load_track()
 
 func load_track(keep_music_going = false):
@@ -22,18 +25,21 @@ func load_track(keep_music_going = false):
 		$TRACK.stream = load(track.audio_file)
 	for c in $Lanes/Enemies.get_children():
 		c.queue_free()
-	var e_sc = load("res://Editor/EnemyForEditor.tscn")
 	for note in track.notes:
 		for i in range(MainGame.inputs.size()):
 			var ch = MainGame.inputs[i]
 			if not ch in note.notes:
 				continue
-			var e = e_sc.instantiate() as EnemyForEditor
-			e.time = note.offset
-			e.letter = ch
-			$Lanes/Enemies.add_child(e)
-			e.position = Vector2(148 + note.offset * PIXELS_PER_SECOND,524 + i * 150)
-			e.on_clicked.connect(delete_note_event)
+			spawn_enemy_icon(note.offset, ch)
+
+func spawn_enemy_icon(time, letter):
+	var e = enemy_icon_scene.instantiate() as EnemyForEditor
+	e.time = time
+	e.letter = letter
+	$Lanes/Enemies.add_child(e)
+	var letterIdx = MainGame.inputs.find(letter)
+	e.position = Vector2(148 + time * PIXELS_PER_SECOND,524 + letterIdx * 150)
+	e.on_clicked.connect(delete_note_event)
 
 func delete_note_event(e:EnemyForEditor):
 	delete_note(e.time, e.letter)
@@ -52,11 +58,23 @@ func delete_note(time:float, letter:String):
 	load_track(true)
 
 func align(time:float):
-	return time - (  fmod(time + time_scale/2, time_scale) - time_scale/2)
+	# align to beat (timescale has beet period in seconds)
+	
+	# last beat passed:
+	
+	var last_beat = time - (fmod(time, time_scale))
+#	if $TRACK.playing:
+#		print("%.3f" % time," -> ", "%.3f" % last_beat)
+	if time > last_beat + time_scale/2 :
+#		print("aligned to -> ", "%.3f" % (last_beat + time_scale))
+		return last_beat + time_scale
+	else:
+		return last_beat
 
 func add_note(time:float, letter:String):
 	time = align(time)
 	print("add ", letter, " ", str(time))
+	spawn_enemy_icon(time, letter)
 	var idx = 0
 	while track.notes.size() < idx and track.notes[idx].offset < time:
 		idx += 1
@@ -70,30 +88,30 @@ func add_note(time:float, letter:String):
 
 func _process(_delta):
 	if $TRACK.playing:
-		time_offset = $TRACK.get_playback_position()
-	$TimeOffset.text = ("%.2f s" % time_offset) + \
+		current_time = $TRACK.get_playback_position()
+	$TimeOffset.text = ("%.3f s" % current_time) + \
+		"\n aligned= %.3f s" % align(current_time) + \
 		"\n scale " + str(time_scale) + \
 		"\n max " + ("%.2f s" % get_track_length())
 	if Input.is_action_just_pressed("edit_next"):
-		#time_offset += time_scale
+		#current_time += time_scale
 		toggle_music()
 	if Input.is_action_just_pressed("edit_prev"):
-		time_offset -= 1
+		current_time -= 1
 	if Input.is_action_just_pressed("edit_scale_zoom_in"):
 		time_scale /= 2
 	if Input.is_action_just_pressed("edit_scale_zoom_out"):
 		time_scale *= 2
 	if Input.is_action_just_pressed("edit_sync_to_scale"):
-		time_offset = floorf(time_offset)
-	$Lanes/Enemies.position.x = 733 - time_offset * PIXELS_PER_SECOND
+		current_time = floorf(current_time)
+	$Lanes/Enemies.position.x = 733 - current_time * PIXELS_PER_SECOND
 	$Lanes/Start.position.x = $Lanes/Enemies.position.x
-	$Line2D/Aligned.position.x = PIXELS_PER_SECOND * ( align(time_offset) - time_offset )
+	$Line2D/Aligned.position.x = PIXELS_PER_SECOND * ( align(current_time) - current_time )
 	
 	for i in range(MainGame.inputs.size()):
 		var ch = MainGame.inputs[i]
 		if Input.is_action_just_pressed(ch):
-			add_note(time_offset, ch)
-			load_track(true)
+			add_note(current_time, ch)
 
 	process_mouse()
 
@@ -111,7 +129,7 @@ func process_mouse():
 		mouse_down_last_click = true
 
 		var diff = (mouse_pos - mouse_start_pos).x
-		time_offset -= diff / PIXELS_PER_SECOND
+		current_time -= diff / PIXELS_PER_SECOND
 
 		mouse_start_pos = mouse_pos
 	else:
@@ -149,9 +167,9 @@ func _on_button_preview_pressed():
 
 func toggle_music():
 	if not $TRACK.playing:
-		if time_offset < 0:
-			time_offset = 0
-		$TRACK.play(time_offset)
+		if current_time < 0:
+			current_time = 0
+		$TRACK.play(current_time)
 	else:
 		$TRACK.stop()
 
